@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="text"],
+input[type="password"], 
+input[type="email"],
+input[type="number"],
+input[type="Date"],
+input[type ='tel'],
+textarea{
+    @apply w-full border-2 my-1 py-2 px-3 rounded-2xl;
+  }
+textarea{
+  height: 160px; /* Default height */
+  min-height: 140px; /* Minimum height */
+  width: 35vw; /* 1/4th of the viewport width */
+  resize: horizontal; /* Allow vertical resizing */
+  border: 1px solid;
+  padding: 5px;
+}
+  
+button{
+  @apply bg-gray-300;
+}
+button.primary{
+  @apply bg-secondary p-2 w-full text-white rounded-2xl;
+}
