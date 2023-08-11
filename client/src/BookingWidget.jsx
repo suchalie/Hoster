@@ -1,7 +1,8 @@
 import axios from "axios";
-import {differenceInCalendarMonths, differenceInCalendarWeeks} from "date-fns";
-import { useState } from "react"
+import {differenceInCalendarMonths} from "date-fns";
+import { useState, useContext, useEffect} from "react"
 import { Navigate } from "react-router-dom";
+import {UserContext} from "./userContext.jsx";
 
 
 export default function BookingWidget({place}){
@@ -11,6 +12,13 @@ export default function BookingWidget({place}){
     const[name, setName]= useState('');
     const[mobile, setMobile]= useState('');
     const[redirect, setRedirect]= useState('');
+    const {user} = useContext(UserContext)
+
+    useEffect(() => {
+        if (user) {
+          setName(user.name);
+        }
+      }, [user]);
 
     // let NumberOfWeeks =0;
     let NumberOfMonths =0;
