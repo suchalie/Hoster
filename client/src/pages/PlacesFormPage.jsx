@@ -74,7 +74,7 @@ export default function PlacesFormPage(){
         if(id){
             //update
                 await axios.put('/places', { id, ...placeData });
-                console.log('Place updated successfully');
+                alert('Place updated successfully');
                 setRedirect(true);
         }
         else{

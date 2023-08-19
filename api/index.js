@@ -20,8 +20,8 @@ app.use('/uploads', express.static(__dirname+ '/uploads'));
 
 const bcryptSalt = bcrypt.genSaltSync(12);//12 = no. of runs which results in longer millisecond, we can achange as per our need
 //study more on this later
-//we forgot to add sync here but do that
-const jwtSecret = "sjkkwhdghjsvsahjKAVSHKDHVKjbsbhaghs";
+//forgot to add sync here but do that
+const jwtSecret = process.env.code;
 
 //connecting the pages
 app.use(cors({
@@ -29,10 +29,17 @@ app.use(cors({
     origin: 'http://localhost:5173'
 }));
 
-port = 8000;
-
-
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+    .then(() => {
+      console.log('Connected to MongoDB');
+      // Your application logic here
+    })
+    .catch(error => {
+      console.error('Error connecting to MongoDB:', error);
+    });
 //
 //creating this as an individual function bcs it keeps repeating itself
 function getDataFromToken(req){
@@ -228,7 +235,7 @@ app.get('/bookings', async (req, res)=>{
 })
 
 
-
+port = 8000;
 app.listen(port, function() {
     console.log('listening on port ' + port)
 });
